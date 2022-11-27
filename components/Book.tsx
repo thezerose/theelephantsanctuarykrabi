@@ -3,10 +3,10 @@ import React from "react";
 import { Ipackages } from "../interface/booking";
 
 type Props = {
-  bookingData: Ipackages
-}
+  bookingData: Ipackages;
+};
 
-const Book = ({bookingData}: Props) => {
+const Book = ({ bookingData }: Props) => {
   return (
     <Container maxWidth="lg">
       <Box>
@@ -14,7 +14,7 @@ const Book = ({bookingData}: Props) => {
           <img src="/images/main.jpeg" alt="img" />
         </Box>
         <Box sx={{ mt: 8 }}>
-          {(bookingData.packages)?.map((item:any) => (
+          {bookingData.packages?.map((item: any) => (
             <Grid container className="mb-4" key={item.id}>
               <Grid item lg={3}>
                 <img src={item.img} alt="img" width="300px" />
@@ -30,12 +30,6 @@ const Book = ({bookingData}: Props) => {
                 <Typography variant="h5" sx={{ my: 1 }}>
                   {item.description}
                 </Typography>
-                <Box sx={{ display: "flex" }}>
-                  <Typography variant="h4" sx={{ fontWeight: 700 }}>
-                    Duration:
-                  </Typography>
-                  <Typography variant="h4">3 Hours (approx.)</Typography>
-                </Box>
               </Grid>
               <Grid item lg={3} sx={{ textAlign: "end" }}>
                 <Typography variant="h4" fontWeight={900}>
@@ -44,13 +38,17 @@ const Book = ({bookingData}: Props) => {
                 <Typography variant="h3" fontWeight={900} mb={2}>
                   ฿ {item.price_adult}
                 </Typography>
-                <Button variant="contained" color="primary" size="large" href={`booking/${item.id}`}>
+                <Button
+                  variant="contained"
+                  color="primary"
+                  size="large"
+                  href={`booking/${item.id}`}
+                >
                   Book Now
                 </Button>
               </Grid>
-          </Grid>
+            </Grid>
           ))}
-
         </Box>
       </Box>
     </Container>
