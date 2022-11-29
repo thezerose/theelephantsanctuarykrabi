@@ -13,30 +13,31 @@ import {
 import { Ipackage } from "../../interface/booking";
 
 type Props = {
-  bookingData: Ipackage
-}
+  bookingData: Ipackage;
+};
 
-export const detailProgram = [
-  `Pick up from you accommodation by minivan`,
-  `Drive approximately 30 minutes from your accommodation to our sanctuary`,
-  `Arrive at Aonang Elephant Sanctuary and meet with our tour guide who will provide you introduction of Aonang Elephant Sanctuary`,
-  `Meet, get to know, interact, cook protein ball and feed the elephants and get muddy with elephant in mud spa pond surrounded by mountain and forest view at our sanctuary`,
-  `When it's time to bathe the elephants, you will walk together and lead them alongside the river to the larger manmade pool-and if you're lucky you might even get splashed with their trunks`,
-  `Take photos group with elephants and get some seasonal fruit, coffee or tea then say good bye to the elephants`,
-  `Leave Aonang Elephant Sanctuary with pleasure to your accommodation safely`,
-];
-
-const Detail = ({bookingData}: Props) => {
+const Detail = ({ bookingData }: Props) => {
   return (
     <Box>
       <Box>
         <Box sx={{ display: "flex" }}>
-          <Typography variant="h2" sx={{ fontWeight: 700 }}>
+          <Typography
+            variant="h2"
+            sx={{
+              fontWeight: 700,
+              mt: 2,
+              borderTop: "4px solid #c29e75 ",
+              pt: 1,
+            }}
+          >
             {bookingData.package.name}
           </Typography>
         </Box>
-        <Box sx={{ display: "flex", mt: 4 }}>
-          <Typography sx={{ color: "#71747a" }}> {bookingData.package.description}</Typography>
+        <Box sx={{ display: "flex", mt: 2 }}>
+          <Typography sx={{ color: "#71747a" }}>
+            {" "}
+            {bookingData.package.description}
+          </Typography>
         </Box>
       </Box>
       <Box mt={6}>
@@ -54,14 +55,16 @@ const Detail = ({bookingData}: Props) => {
               },
             }}
           >
-            {(bookingData.itinerary).map((item:any) => (
+            {bookingData.itinerary.map((item: any) => (
               <TimelineItem key={item.id} sx={{ mb: 1 }}>
                 <TimelineSeparator>
                   <TimelineDot variant="outlined" color="secondary" />
                   <TimelineConnector sx={{ backgroundColor: "#9DAC6E" }} />
                 </TimelineSeparator>
                 <TimelineContent>
-                  <Typography sx={{ fontWeight: 700, mb: 1 }}>{item.time}</Typography>
+                  <Typography sx={{ fontWeight: 700, mb: 1 }}>
+                    {item.time}
+                  </Typography>
                   <Typography>{item.detail}</Typography>
                 </TimelineContent>
               </TimelineItem>

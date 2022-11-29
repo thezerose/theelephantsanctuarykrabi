@@ -1,5 +1,6 @@
 import { Box, Button, Divider, Stack, Typography } from "@mui/material";
 import React from "react";
+import NextLink from "next/link";
 
 const Bill = () => {
   const price = 2500;
@@ -52,6 +53,7 @@ const Bill = () => {
             <Typography>฿ {price}</Typography>
           </Box>
         </Box>
+
         <Box sx={{ mt: 2 }}>
           <Button
             sx={{
@@ -60,12 +62,13 @@ const Bill = () => {
               color: "white !important",
               py: 2,
               fontSize: "18px",
-              fontWeight:700
+              fontWeight: 700,
             }}
             fullWidth
             size="medium"
+            href="/summary"
           >
-            Pay  ฿{price}
+            Pay ฿{price}
           </Button>
         </Box>
       </Stack>

@@ -1,5 +1,5 @@
 import { Box, Button, Grid, MenuItem, Stack, Typography } from "@mui/material";
-import Select, { SelectChangeEvent } from '@mui/material/Select';
+import Select, { SelectChangeEvent } from "@mui/material/Select";
 import dayjs, { Dayjs } from "dayjs";
 import React, { useEffect, useState } from "react";
 import { CalendarPicker } from "@mui/x-date-pickers/CalendarPicker";
@@ -13,12 +13,14 @@ import { useRouter } from "next/router";
 
 const moment = require("moment");
 type Props = {
-  bookingTicketData: IBookingTicket
-}
+  bookingTicketData: IBookingTicket;
+};
 
-const BookingTicket = ({bookingTicketData}: Props) => {
+const BookingTicket = ({ bookingTicketData }: Props) => {
   const router = useRouter();
-  const [date, setDate] = React.useState<Dayjs | null>(dayjs(moment().format("YYYY-MM-DD")));
+  const [date, setDate] = React.useState<Dayjs | null>(
+    dayjs(moment().format("YYYY-MM-DD"))
+  );
   const [numAdult, setNumAdult] = useState<number>(1);
   const [numChild, setNumChild] = useState<number>(0);
   const [numInfant, setNumInfant] = useState<number>(0);
@@ -39,18 +41,23 @@ const BookingTicket = ({bookingTicketData}: Props) => {
     const adultPrice = bookingTicketData.adult_price * numAdult;
     const childPrice = bookingTicketData.child_price * numChild;
     const infantPrice = bookingTicketData.infant_price * numInfant;
-    setTotalPrice(adultPrice + childPrice + infantPrice)
-  },[numAdult, numChild, numInfant])
+    setTotalPrice(adultPrice + childPrice + infantPrice);
+  }, [numAdult, numChild, numInfant]);
 
-  const submitBookingHandler = async() => {
+  const submitBookingHandler = async () => {
     const bookDate = moment(date).format("YYYY-MM-DD");
-    const res = await getBookPackagePeople(bookDate, bookingTicketData.packageId);
-    if(parseInt(res) < 100){
-      router.push(`/payment?package_id=${bookingTicketData.packageId}&book_date=${bookDate}&adult=${numAdult}&child=${numChild}&infant=${numInfant}`);
+    const res = await getBookPackagePeople(
+      bookDate,
+      bookingTicketData.packageId
+    );
+    if (parseInt(res) < 100) {
+      router.push(
+        `/payment?package_id=${bookingTicketData.packageId}&book_date=${bookDate}&adult=${numAdult}&child=${numChild}&infant=${numInfant}`
+      );
     } else {
-      setIsFull(1)
+      setIsFull(1);
     }
-  }
+  };
 
   return (
     <Box>
@@ -80,9 +87,9 @@ const BookingTicket = ({bookingTicketData}: Props) => {
         }}
       >
         <Stack sx={{ px: 4, py: 2 }}>
-          <Typography variant="h4">
+          <Typography variant="h4" fontWeight={700}>
             Number of Participants{" "}
-            <Typography component="span" color="#7c8b4d">
+            <Typography component="span" color="#7c8b4d" fontWeight={700}>
               *
             </Typography>{" "}
           </Typography>
@@ -90,17 +97,22 @@ const BookingTicket = ({bookingTicketData}: Props) => {
             <Grid item xs={6}>
               <Box>
                 <Typography>Adult</Typography>
-                <Typography sx={{ color: "#71747a	" }}>{converToCurrencyFormat(bookingTicketData.adult_price)} THB</Typography>
+                <Typography sx={{ color: "#71747a	" }}>
+                  {converToCurrencyFormat(bookingTicketData.adult_price)} THB
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
-              <Select 
+              <Select
                 value={`${numAdult}`}
                 onChange={handleAdultChange}
+                sx={{ width: "65px" }}
               >
-              {[...Array(10)].map((x, i) =>
-                <MenuItem value={i+1} key={i+1}>{i+1}</MenuItem>
-              )}
+                {[...Array(10)].map((x, i) => (
+                  <MenuItem value={i + 1} key={i + 1}>
+                    {i + 1}
+                  </MenuItem>
+                ))}
               </Select>
             </Grid>
           </Grid>
@@ -108,42 +120,55 @@ const BookingTicket = ({bookingTicketData}: Props) => {
             <Grid item xs={6}>
               <Box>
                 <Typography>Child (4-10 yrs)</Typography>
-                <Typography sx={{ color: "#71747a	 " }}>{converToCurrencyFormat(bookingTicketData.child_price)} THB</Typography>
+                <Typography sx={{ color: "#71747a	 " }}>
+                  {converToCurrencyFormat(bookingTicketData.child_price)} THB
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
-              <Select 
+              <Select
                 value={`${numChild}`}
                 onChange={handleChildChange}
+                sx={{ width: "65px" }}
               >
-                {[...Array(10)].map((x, i) =>
-                  <MenuItem value={i} key={i}>{i}</MenuItem>
-                )}
-                </Select>
+                {[...Array(11)].map((x, i) => (
+                  <MenuItem value={i} key={i}>
+                    {i}
+                  </MenuItem>
+                ))}
+              </Select>
             </Grid>
           </Grid>
           <Grid container mt={2}>
             <Grid item xs={6}>
               <Box>
                 <Typography>Infant (Below 4 yrs)</Typography>
-                <Typography sx={{ color: "#71747a	 " }}>{(bookingTicketData.infant_price!==0)?converToCurrencyFormat(bookingTicketData.infant_price)+' THB':'Free'}</Typography>
+                <Typography sx={{ color: "#71747a	 " }}>
+                  {bookingTicketData.infant_price !== 0
+                    ? converToCurrencyFormat(bookingTicketData.infant_price) +
+                      " THB"
+                    : "Free"}
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
-              <Select 
+              <Select
                 value={`${numInfant}`}
                 onChange={handleInfantChange}
+                sx={{ width: "65px" }}
               >
-                {[...Array(10)].map((x, i) =>
-                  <MenuItem value={i} key={i}>{i}</MenuItem>
-                )}
+                {[...Array(11)].map((x, i) => (
+                  <MenuItem value={i} key={i}>
+                    {i}
+                  </MenuItem>
+                ))}
               </Select>
             </Grid>
           </Grid>
           <Box>
-            <Typography variant="h4">
+            <Typography variant="h4" fontWeight={700}>
               Choose a Date{" "}
-              <Typography component="span" color="#7c8b4d">
+              <Typography component="span" color="#7c8b4d" fontWeight={700}>
                 *
               </Typography>{" "}
             </Typography>
@@ -158,7 +183,7 @@ const BookingTicket = ({bookingTicketData}: Props) => {
                 >
                   <CalendarPicker
                     date={date}
-                    maxDate={dayjs(moment().add(1, 'year'))}
+                    maxDate={dayjs(moment().add(1, "year"))}
                     disablePast={true}
                     onChange={(newDate) => setDate(newDate)}
                   />
@@ -170,7 +195,9 @@ const BookingTicket = ({bookingTicketData}: Props) => {
           <Grid container mt={2}>
             <Grid item xs={6} sx={{ display: "flex" }}>
               <Box my="auto">
-                <Typography variant="h3">Total Price</Typography>
+                <Typography variant="h3" fontWeight={700}>
+                  Total Price
+                </Typography>
               </Box>
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
@@ -184,14 +211,11 @@ const BookingTicket = ({bookingTicketData}: Props) => {
             </Grid>
           </Grid>
 
-          {
-            (isFull === 1) && (
-              <Typography variant="h6" sx={{ color: "#FF0000	 " }}>
+          {isFull === 1 && (
+            <Typography variant="h6" sx={{ color: "#FF0000	 " }}>
               This date already full, Please change date
-              </Typography>
-            )
-          }
-
+            </Typography>
+          )}
 
           <Box sx={{ my: 2 }}>
             <Button

@@ -4,10 +4,10 @@ import React from "react";
 import { Ipackage } from "../../interface/booking";
 
 type Props = {
-  bookingData: Ipackage
-}
+  bookingData: Ipackage;
+};
 
-const BoxProgram = ({bookingData}: Props) => {
+const BoxProgram = ({ bookingData }: Props) => {
   return (
     <Box>
       <Grid container columnSpacing={3} rowSpacing={3}>
@@ -15,7 +15,7 @@ const BoxProgram = ({bookingData}: Props) => {
           <Box
             sx={{
               border: "0.5px solid #c29e75	",
-              minHeight: "250px",
+              minHeight: "280px",
               borderTop: "5px solid #c29e75",
             }}
           >
@@ -28,9 +28,9 @@ const BoxProgram = ({bookingData}: Props) => {
                 </Box>
                 <Divider sx={{ mx: 6, my: 2 }} />
                 <Box>
-                  {(bookingData.program_include).map((item:any) => (
-                    <Grid container key={item.id} >
-                      <Grid item sx={{ mr: 1 }}>
+                  {bookingData.program_include.map((item: any) => (
+                    <Grid container key={item.id}>
+                      <Grid item lg={1} sx={{ mr: 1 }}>
                         <ArrowForward
                           sx={{
                             background: " #c29e75",
@@ -40,7 +40,7 @@ const BoxProgram = ({bookingData}: Props) => {
                           }}
                         />
                       </Grid>
-                      <Grid>
+                      <Grid item lg={10}>
                         <Typography>{item.detail}</Typography>
                       </Grid>
                     </Grid>
@@ -54,7 +54,7 @@ const BoxProgram = ({bookingData}: Props) => {
           <Box
             sx={{
               border: "0.5px solid #c29e75	",
-              minHeight: "250px",
+              minHeight: "280px",
               borderTop: "5px solid #c29e75",
             }}
           >
@@ -67,23 +67,23 @@ const BoxProgram = ({bookingData}: Props) => {
                 </Box>
                 <Divider sx={{ mx: 6, my: 2 }} />
                 <Box>
-                  {(bookingData.what_bring).map((item:any) => (
-                      <Grid container key={item.id} >
-                        <Grid item sx={{ mr: 1 }}>
-                          <ArrowForward
-                            sx={{
-                              background: " #c29e75",
-                              color: "white",
-                              fontSize: "18px",
-                              borderRadius: "50px",
-                            }}
-                          />
-                        </Grid>
-                        <Grid>
-                          <Typography>{item.detail}</Typography>
-                        </Grid>
+                  {bookingData.what_bring.map((item: any) => (
+                    <Grid container key={item.id}>
+                      <Grid item lg={1} sx={{ mr: 1 }}>
+                        <ArrowForward
+                          sx={{
+                            background: " #c29e75",
+                            color: "white",
+                            fontSize: "18px",
+                            borderRadius: "50px",
+                          }}
+                        />
                       </Grid>
-                    ))}
+                      <Grid item lg={10}>
+                        <Typography>{item.detail}</Typography>
+                      </Grid>
+                    </Grid>
+                  ))}
                 </Box>
               </Stack>
             </Box>
