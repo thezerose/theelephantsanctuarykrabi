@@ -45,7 +45,7 @@ const BookingTicket = ({bookingTicketData}: Props) => {
   const submitBookingHandler = async() => {
     const bookDate = moment(date).format("YYYY-MM-DD");
     const res = await getBookPackagePeople(bookDate, bookingTicketData.packageId);
-    if(parseInt(res) < 0){
+    if(parseInt(res) < 100){
       router.push(`/payment?package_id=${bookingTicketData.packageId}&book_date=${bookDate}&adult=${numAdult}&child=${numChild}&infant=${numInfant}`);
     } else {
       setIsFull(1)
@@ -95,7 +95,7 @@ const BookingTicket = ({bookingTicketData}: Props) => {
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
               <Select 
-                value={numAdult}
+                value={`${numAdult}`}
                 onChange={handleAdultChange}
               >
               {[...Array(10)].map((x, i) =>
@@ -113,7 +113,7 @@ const BookingTicket = ({bookingTicketData}: Props) => {
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
               <Select 
-                value={numChild}
+                value={`${numChild}`}
                 onChange={handleChildChange}
               >
                 {[...Array(10)].map((x, i) =>
@@ -131,7 +131,7 @@ const BookingTicket = ({bookingTicketData}: Props) => {
             </Grid>
             <Grid item xs={6} display="flex" justifyContent="end">
               <Select 
-                value={numInfant}
+                value={`${numInfant}`}
                 onChange={handleInfantChange}
               >
                 {[...Array(10)].map((x, i) =>
